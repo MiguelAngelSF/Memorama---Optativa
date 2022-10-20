@@ -1,0 +1,30 @@
+.container{
+  margin: 5px;
+  width: 50%;
+}
+
+.buttons {
+  margin-left: 300px;
+}
+
+button{
+  height: 130px;
+  width: 130px;
+  font-size: 80px;
+  background-color: white;
+  color: white;
+}
+
+.results {
+  margin-left: 300px;
+  margin-top: 0px;
+}
+
+h1{
+  text-align: center;
+}
+
+img{
+  width: 80%;
+}
+
