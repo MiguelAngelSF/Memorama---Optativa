@@ -2,7 +2,12 @@
 const tryShow = document.getElementById('try');
 let revealCards = 0;
 let result = 0;
+let buttonOne = [];
+let buttonSecond = [];
 let buttonsAll = [];
+let counterOne = 0;
+let counterAll = 0;
+
 ///////////////////////////////////////////////////
 let buttons = [1,1,2,2,3,3,4,4,  
                5,5,6,6,7,7,8,8,
@@ -14,41 +19,62 @@ let buttons = [1,1,2,2,3,3,4,4,
                29,29,30,30,31,31,32,32];
 ///////////////////////////////////////////////////
 buttons = buttons.sort(function(){return Math.random() - 0.5}) ///FUNCION PARA DESORDENAR Y OBTENER RANDOM EN CADA JUEGO
-buttons = buttons.slice(0,8); /////OBTENCION DE LOS PRIMAS 8 POSICIONES DEL ARRAY DESORDENADO PARA EL PRIMER PAR DE IMAGENES
+buttons = buttons.slice(0,8); /////OBTENCION DE LOS PRIMERAS 8 POSICIONES DEL ARRAY DESORDENADO PARA EL PRIMER PAR DE IMAGENES
 buttonsAll = buttons.slice(); /////COPIAMOS EL ARRAY buttons a uno nuevo buttonsAll PARA QUE CONTENGA LOS MISMO PARES DE IMAGENES Y CONCUERDEN
 console.log('PrimerPar',buttons);
 console.log('SegundoPar',buttonsAll);
 buttonsAll = buttonsAll.concat(buttons);
 console.log('ArrayAll',buttonsAll); //////CONCATENAMOS O FUSIONAMOS LOS DOS ARRAYS PARA MANEJARLO EN LA VARIABLE DE LAS CONDICIONES
-buttonsAll = buttonsAll.sort(function(){return Math.random() -0.3})//////VOLVEMOS A DESORDENAR LA LISTA PARA OBETENER RANDOM Y LAS IMAGENES SE MUESTRE EN DIFERENTES PSOSICIOONES
+buttonsAll = buttonsAll.sort(function(){return Math.random() - 0.5})//////VOLVEMOS A DESORDENAR LA LISTA PARA OBETENER RANDOM Y LAS IMAGENES SE MUESTRE EN DIFERENTES PSOSICIOONES
+
 
 /////////////////////////////////////FUNCION PARA CONDICIONES PARA VOLTEAR CATA IMAGEN UNA A LA VEZ
 function showButton(id){
 
   if (revealCards == 0){
-    let buttonOne = document.getElementById(id);   
+    buttonOne = document.getElementById(id);   
     b1 = buttonsAll[id]; 
     buttonOne.innerHTML = `<img src="/img/${b1}.jpg" alt="">`;
+    // buttonOne.classList.remove("btn","btn-dark","btn-md")
     buttonOne.disabled = true;
     revealCards++;
 
-    idOne = id;
+    idOne = id; 
 
-  }else if (revealCards == 1){
-    let buttonSecond = document.getElementById(id);
+  }else if (revealCards == 1){ 
+    buttonSecond = document.getElementById(id);
     b2 = buttonsAll[id];
     buttonSecond.innerHTML = `<img src="/img/${b2}.jpg" alt="">`;
+    // buttonSecond.classList.remove("btn","btn-dark","btn-md")
     buttonSecond.disabled = true;
-    revealCards++;
+    revealCards++; 
 
-    idSecond = id;
+    idSecond = id; 
 
 
     if(b1 == b2){
+      buttonOne.classList.remove("btn","btn-dark","btn-md")
+      buttonSecond.classList.remove("btn","btn-dark","btn-md")
+   
+      buttonOne.classList.remove("btn", "btn-danger", "btn-md");
+      buttonSecond.classList.remove("btn", "btn-danger", "btn-md");
+
+      buttonOne.classList.add("btn","btn-success","btn-md")
+      buttonSecond.classList.add("btn","btn-success","btn-md")
+      console.log(buttonOne)
       revealCards = 0;
       result++;
     }else{
+      buttonOne.classList.remove("btn","btn-dark","btn-md")
+      buttonSecond.classList.remove("btn","btn-dark","btn-md")
+
+      buttonOne.classList.add("btn", "btn-danger", "btn-md");
+      buttonSecond.classList.add("btn", "btn-danger", "btn-md");
+   
       setTimeout(()=>{
+        buttonOne = document.getElementById(idOne);
+        buttonSecond = document.getElementById(idSecond);
+
         buttonOne = document.getElementById(idOne);
         buttonOne.innerHTML = ' ';
         buttonOne.disabled = false;
@@ -56,8 +82,14 @@ function showButton(id){
         buttonSecond.innerHTML = ' ';
         buttonSecond.disabled = false; 
         revealCards = 0;
+
+        buttonOne.classList.remove("btn", "btn-danger", "btn-md");
+        buttonSecond.classList.remove("btn", "btn-danger", "btn-md");
+        buttonOne.classList.add("btn", "btn-dark", "btn-md");
+        buttonSecond.classList.add("btn", "btn-dark", "btn-md");
       },1000)
-      
+        // buttonOne.classList.add("btn","btn-danger","btn-md")
+        // buttonSecond.classList.add("btn","btn-danger","btn-md")
     }
   }
 
@@ -67,4 +99,13 @@ function showButton(id){
     tryShow.innerHTML = "Game Over";
   }
 }
+/////////////////////////////FUNCION PARA EL CONTADOR DE INTENTOS
+function counter(){
+  counterOne ++;
+  if(counterOne % 2 == 0){
+    counterAll ++;
+  }
+  tryShow.innerHTML = `Intentos: ${counterAll}`;
+}
+
 

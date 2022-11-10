@@ -1,3 +1,11 @@
+body {
+  background-image: url("../img/back.jpg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  
+}
+
 .container{
   margin: 5px;
   width: 50%;
@@ -18,10 +26,12 @@ button{
 .results {
   margin-left: 300px;
   margin-top: 0px;
+  color: white;
 }
 
 h1{
   text-align: center;
+  color: white;
 }
 
 img{
